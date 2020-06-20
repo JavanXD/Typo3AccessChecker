@@ -22,6 +22,7 @@ class AccessChecker:
         r = requests.get(hostUrl)
         if (r.status_code == 404):
             self.last404ErrorPageLength == len(r.content)
+            print("404 Error Page size is " + str(len(r.content)))
 
     def checkAccess(self, host, checklistFileName, useragent, proxyDict, headers):
         linesList = [line.rstrip('\r\n')
@@ -31,7 +32,7 @@ class AccessChecker:
         #removing possible double slashes
         linesList = [re.sub(r"([^:]/)(/)+", r"\1", hostString) for hostString in linesList]
 
-        print("Replaced strings, checking connection ... \r\n")
+        #print("Replaced strings, checking connection ... \r\n")
         self.determineInitial404Size(host)
 
         count = 0
@@ -99,8 +100,8 @@ class AccessChecker:
 
             print(checkResult)
 
-        print('Found '+str(len(reportDict))+' of ' +
-              str(count)+' suspicious responses.')
+        print('Detected '+str(len(reportDict))+' of ' +
+              str(count)+' responses as suspicious.')
         print("Status-code fast check overview:")
         for i in foundStatusCodes:
             print("", i, ":", foundStatusCodes[i])
@@ -126,4 +127,3 @@ class AccessChecker:
             print("Report saved to "+csv_file)
         except IOError:
             print("I/O error - Could not write report file.")
-
