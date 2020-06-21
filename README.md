@@ -25,6 +25,9 @@ List of possible arguments:
 python3 check_axxess.py -h
 ```
 
+## Checklist
+The checklist contains a default set of URLs that should be protected. You can expand the checklist by adding lines in the format https://mydomain/urlpath. Please do not replace mydomain with your real URL, this is done by the application using the host parameter that is passed on startup
+
 
 ## Contribute
 Feel free to open issues / pull requests if you want to contribute to this project.
