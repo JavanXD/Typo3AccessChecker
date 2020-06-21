@@ -3,6 +3,7 @@ import urllib3
 import progressbar
 import csv
 import re
+# SSL warnings are diabled for this tool to avoid conflicts with self-signed certificates
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 
@@ -32,7 +33,6 @@ class AccessChecker:
         #removing possible double slashes
         linesList = [re.sub(r"([^:]/)(/)+", r"\1", hostString) for hostString in linesList]
 
-        #print("Replaced strings, checking connection ... \r\n")
         self.determineInitial404Size(host)
 
         count = 0
@@ -108,10 +108,8 @@ class AccessChecker:
         self.printCsvReport(host, reportDict)
 
     def printCsvReport(self, host, reportDict):
-        # print(reportDict)
+        # transforming hostname to a clean representation for filename
         cleanhostname = re.sub(r'[^A-Za-z0-9]', '', host)
-
-        #reportDict = [re.sub(r"([^:]/)(/)+", r"\1", dictValue['url']) for dictValue in reportDict
 
 
         reportDict
