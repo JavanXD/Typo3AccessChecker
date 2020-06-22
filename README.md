@@ -13,10 +13,16 @@ python3 -m pip install requests progressbar
 
 ## Usage
 
-Start a Scan of `https://typo3.org` and use a proxy (e.g. OWASP ZAP/Burp)
+Start a Scan of `https://typo3.org` with the default checklist: 
 
 ```
-python3 check_axxess.py https://typo3.org checklist.txt --proxy localhost:8080`
+python3 check_axxess.py https://typo3.org checklist.txt
+```
+
+Start a Scan of `https://typo3.org` and use a proxy (e.g. OWASP ZAP/Burp/Fiddler). The proxy function helps you during a manual check by displaying the exact answer you received. 
+
+```
+python3 check_axxess.py https://typo3.org checklist.txt --proxy localhost:8080
 ```
 
 List of possible arguments: 
@@ -26,7 +32,7 @@ python3 check_axxess.py -h
 ```
 
 ## Checklist
-The checklist contains a default set of URLs that should be protected. You can expand the checklist by adding lines in the format https://mydomain/urlpath. Please do not replace mydomain with your real URL, this is done by the application using the host parameter that is passed on startup
+The checklist contains a default set of URLs that should be protected. You can expand the checklist by adding lines in the format `https://my.domain/`. Please do not replace `my.domain` with your real URL, this is done by the application using the host parameter that is passed on startup.
 
 
 ## Contribute
