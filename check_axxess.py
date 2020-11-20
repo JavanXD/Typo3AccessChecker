@@ -38,6 +38,10 @@ def main():
         '--proxy', nargs='?', help='Use a proxy like OWASP ZAP or Fiddler: localhost:8080', type=str)
     parser.add_argument('--useragent', nargs='?',
                         help='Define a User-Agent. By default: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', type=str)
+    parser.add_argument('--auth', nargs='+',
+                        help='Define a value for Authorization header: "Basic dXNlcjpwYXNz"', type=str)
+    parser.add_argument('--cookie', nargs='+',
+                        help='Define a value for Cookie header: key=value', type=str)
     #parser.add_argument("counter", help="An integer will be increased by 1 and printed.", type=int)
     args = parser.parse_args()
     host = sys.argv[1] if len(sys.argv) > 1 else "https://typo3.org"
@@ -60,6 +64,10 @@ def main():
     headers = {
         'User-Agent': useragent
     }
+    if args.auth:
+        headers['Authorization'] = str(args.auth[0])
+    if args.cookie:
+        headers['Cookie'] = str(args.cookie[0])
     checker.AccessChecker().checkAccess(
         host, checklistFileName, useragent, proxyDict, headers)
 
